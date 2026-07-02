@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getProducts } from "../services/productService";
 import type { Product } from "../types/product";
 import styles from "./Home.module.scss";
+import ProductCard from "../components/ProductCard/ProductCard";
 
 const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -56,17 +57,10 @@ const Home = () => {
 
       <section className={styles.grid}>
         {products.map((product) => (
-          <article key={product.id} className={styles.card}>
-            <img
-              src={product.image}
-              alt={product.title}
-              className={styles.image}
-            />
-
-            <h3>{product.title}</h3>
-
-            <p>${product.price}</p>
-          </article>
+          <ProductCard
+            key={product.id}
+            product={product}
+          />
         ))}
       </section>
     </main>
