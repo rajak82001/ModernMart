@@ -35,7 +35,7 @@ const CartDrawer = () => {
         <div className={styles.overlay} onClick={() => dispatch({ type: "TOGGLE_CART" })} role="presentation" />
       )}
 
-      <aside id="cart-drawer" className={`${styles.drawer} ${state.isCartOpen ? styles.open : ""}`} role="dialog" aria-modal="true" aria-labelledby="cart-drawer-title">
+      <div id="cart-drawer" className={`${styles.drawer} ${state.isCartOpen ? styles.open : ""}`} role="dialog" aria-modal="true" aria-labelledby="cart-drawer-title">
         <div className={styles.header}>
           <h2 id="cart-drawer-title">Shopping Cart</h2>
 
@@ -53,7 +53,7 @@ const CartDrawer = () => {
                 <img src={item.image} alt={item.title} className={styles.image} loading="lazy" decoding="async" />
 
                 <div className={styles.info}>
-                  <h4>{item.title}</h4>
+                  <p className={styles.itemTitle}>{item.title}</p>
                   {item.selectedColor && item.selectedSize && (
                     <p className={styles.variant}>
                       {item.selectedColor} / {item.selectedSize}
@@ -129,7 +129,7 @@ const CartDrawer = () => {
         <div className={styles.footer}>
           <h3>Total: ${subtotal.toFixed(2)}</h3>
         </div>
-      </aside>
+      </div>
     </>
   );
 };

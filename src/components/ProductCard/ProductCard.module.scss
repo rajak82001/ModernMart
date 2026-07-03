@@ -12,11 +12,16 @@
   transform: translateY(-4px);
 }
 
+.imageLink {
+  display: block;
+  margin-bottom: 1rem;
+}
+
 .image {
   width: 100%;
-  height: 220px;
+  height: auto;
+  aspect-ratio: 1 / 1;
   object-fit: contain;
-  margin-bottom: 1rem;
 }
 
 .content {
@@ -31,11 +36,18 @@
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 1rem;
+  min-height: 2.75rem;
+  display: block;
+  line-height: 1.4;
 
   display: -webkit-box;
   -webkit-box-orient: vertical;
-
   overflow: hidden;
+}
+
+.title:hover,
+.title:focus-visible {
+  color: #1f2937;
 }
 
 .price {
@@ -46,15 +58,20 @@
 
 .button {
   margin-top: auto;
-  padding: 0.75rem;
+  min-height: 48px;
+  padding: 0.8rem 1rem;
   border: none;
   border-radius: 8px;
   background-color: #111827;
   color: #ffffff;
   cursor: pointer;
   font-size: 0.95rem;
+  font-weight: 600;
 }
 
-.button:hover {
+.button:hover,
+.button:focus-visible {
   opacity: 0.9;
+  outline: 2px solid #111827;
+  outline-offset: 2px;
 }

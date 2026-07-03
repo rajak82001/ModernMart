@@ -193,9 +193,16 @@ const ProductDetails = () => {
   return (
     <main className={styles.container}>
       <section className={styles.imageSection}>
-        <img src={selectedImage || product.image} alt={product.title} className={styles.image} loading="eager" />
+        <img
+          src={selectedImage || product.image}
+          alt={product.title}
+          className={styles.image}
+          loading="eager"
+          width={800}
+          height={800}
+        />
 
-        <div className={styles.thumbnails}>
+        <div className={styles.thumbnails} aria-label="Product image gallery">
           {selectedColor?.images.map((image) => (
             <button
               key={image}
@@ -204,7 +211,7 @@ const ProductDetails = () => {
               className={selectedImage === image ? styles.activeThumbnail : ""}
               aria-label={`Show ${product.title} view`}
             >
-              <img src={image} alt={`${product.title} view`} loading="lazy" decoding="async" />
+              <img src={image} alt={`${product.title} view`} loading="lazy" decoding="async" width={90} height={90} />
             </button>
           ))}
         </div>
@@ -212,7 +219,7 @@ const ProductDetails = () => {
         <div>
           <h3>Color</h3>
 
-          <div className={styles.colors}>
+          <div className={styles.colors} role="group" aria-label="Choose a color">
             {variantData?.colors.map((color) => {
               const isSelected = selectedColor?.name === color.name;
 
@@ -236,7 +243,7 @@ const ProductDetails = () => {
         <div>
           <h3>Size</h3>
 
-          <div className={styles.sizes}>
+          <div className={styles.sizes} role="group" aria-label="Choose a size">
             {selectedColor?.sizes.map((size) => {
               const isSelected = selectedSize?.value === size.value;
               const isSoldOut = size.status === "sold-out";
@@ -277,10 +284,10 @@ const ProductDetails = () => {
         </button>
       </section>
 
-      <section className={styles.content}>
+      <section className={styles.content} aria-labelledby="product-title">
         <p className={styles.category}>{product.category}</p>
 
-        <h1>{product.title}</h1>
+        <h1 id="product-title">{product.title}</h1>
 
         <p className={styles.description}>{product.description}</p>
 

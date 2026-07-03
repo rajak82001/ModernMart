@@ -25,8 +25,17 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <article className={styles.card}>
-      <Link to={`/product/${product.id}`} aria-label={`View ${product.title}`}>
-        <img src={product.image} alt={product.title} className={styles.image} loading="lazy" decoding="async" />
+      <Link to={`/product/${product.id}`} aria-label={`View ${product.title}`} className={styles.imageLink}>
+        <img
+          src={product.image}
+          alt={product.title}
+          className={styles.image}
+          loading="lazy"
+          decoding="async"
+          width={320}
+          height={320}
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
       </Link>
 
       <div className={styles.content}>
@@ -36,7 +45,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
         <p className={styles.price}>${product.price.toFixed(2)}</p>
 
-        <button type="button" className={styles.button} onClick={handleQuickAdd}>
+        <button type="button" className={styles.button} onClick={handleQuickAdd} aria-label={`Quick add ${product.title} to cart`}>
           Quick Add
         </button>
       </div>
