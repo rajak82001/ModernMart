@@ -122,7 +122,7 @@ Possible next steps for the project include:
 
 ## Live Demo
 
-- Live URL: (https://github.com/rajak82001/ModernMart)
+- Live URL: https://modern-mart-ivory.vercel.app/
 - GitHub Repository: (https://github.com/rajak82001/ModernMart)
 
 ## Author
