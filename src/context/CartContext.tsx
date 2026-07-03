@@ -1,5 +1,7 @@
 import {
   createContext,
+  useEffect,
+  useMemo,
   useReducer,
   type Dispatch,
   type ReactNode,
@@ -27,18 +29,44 @@ interface CartProviderProps {
   children: ReactNode;
 }
 
+const getInitialState = (): CartState => {
+  try {
+    const storedCart = localStorage.getItem("cart");
+
+    return storedCart
+      ? {
+          ...initialState,
+          items: JSON.parse(storedCart),
+        }
+      : initialState;
+  } catch {
+    return initialState;
+  }
+};
+
 export const CartProvider = ({
   children,
 }: CartProviderProps) => {
   const [state, dispatch] = useReducer(
     cartReducer,
-    initialState
+    initialState,
+    getInitialState,
+  );
+
+  useEffect(() => {
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(state.items),
+    );
+  }, [state.items]);
+
+  const value = useMemo(
+    () => ({ state, dispatch }),
+    [state]
   );
 
   return (
-    <CartContext.Provider
-      value={{ state, dispatch }}
-    >
+    <CartContext.Provider value={value}>
       {children}
     </CartContext.Provider>
   );

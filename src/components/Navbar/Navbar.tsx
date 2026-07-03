@@ -6,10 +6,7 @@ import styles from "./Navbar.module.scss";
 const Navbar = () => {
   const { state, dispatch } = useCart();
 
-  const itemCount = state.items.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
+  const itemCount = state.items.reduce((total, item) => total + item.quantity, 0);
 
   const handleCartToggle = () => {
     dispatch({ type: "TOGGLE_CART" });
@@ -25,18 +22,14 @@ const Navbar = () => {
         <button
           type="button"
           className={styles.cartButton}
-          aria-label="Open cart"
+          aria-label={state.isCartOpen ? "Close cart" : "Open cart"}
           aria-expanded={state.isCartOpen}
           aria-controls="cart-drawer"
           onClick={handleCartToggle}
         >
           <FiShoppingCart size={24} aria-hidden="true" />
 
-          {itemCount > 0 && (
-            <span className={styles.badge}>
-              {itemCount}
-            </span>
-          )}
+          {itemCount > 0 && <span className={styles.badge}>{itemCount}</span>}
         </button>
       </div>
     </header>

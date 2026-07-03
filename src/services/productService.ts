@@ -15,3 +15,17 @@ export const getProducts = async (): Promise<Product[]> => {
         throw new Error("Failed to fetch products");
     }
 };
+
+export const getProductById = async (
+    id: string,
+): Promise<Product> => {
+    try {
+        const { data } = await axios.get<Product>(
+            `${BASE_URL}/products/${id}`
+        );
+
+        return data;
+    } catch {
+        throw new Error("Failed to fetch product");
+    }
+};
