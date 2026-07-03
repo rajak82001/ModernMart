@@ -1,12 +1,23 @@
 import { Link } from "react-router-dom";
 import type { Product } from "../../types/product";
 import styles from "./ProductCard.module.scss";
+import { useCart } from "../../hooks/useCart";
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+
+    const { dispatch } = useCart();
+
+    const handleQuickAdd = (): void => {
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: product,
+    });
+  };
+
   return (
     <article className={styles.card}>
       <Link to={`/product/${product.id}`}>
@@ -20,7 +31,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
         <p className={styles.price}>${product.price.toFixed(2)}</p>
 
-        <button className={styles.button} type="button">
+        <button type="button"
+          className={styles.button}
+          onClick={handleQuickAdd}>
           Quick Add
         </button>
       </div>

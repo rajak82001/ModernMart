@@ -1,9 +1,19 @@
 import { Link } from "react-router-dom";
 import { FiShoppingCart } from "react-icons/fi";
+import { useCart } from "../../hooks/useCart";
 import styles from "./Navbar.module.scss";
 
 const Navbar = () => {
-  const cartCount = 0;
+  const { state, dispatch } = useCart();
+
+  const itemCount = state.items.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
+  const handleCartToggle = () => {
+    dispatch({ type: "TOGGLE_CART" });
+  };
 
   return (
     <header className={styles.header}>
@@ -15,11 +25,18 @@ const Navbar = () => {
         <button
           type="button"
           className={styles.cartButton}
-          aria-label={`Open cart with ${cartCount} items`}
+          aria-label="Open cart"
+          aria-expanded={state.isCartOpen}
+          aria-controls="cart-drawer"
+          onClick={handleCartToggle}
         >
           <FiShoppingCart size={24} aria-hidden="true" />
 
-          {cartCount > 0 && <span className={styles.badge}>{cartCount}</span>}
+          {itemCount > 0 && (
+            <span className={styles.badge}>
+              {itemCount}
+            </span>
+          )}
         </button>
       </div>
     </header>
